@@ -1,0 +1,359 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff6b9d;
+    --light-pink: #ffc2d1;
+    --peach: #ffb5a7;
+    --cream: #fff5e4;
+    --purple: #c779d0;
+    --dark: #4a4a4a;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--light-pink) 100%);
+    min-height: 100vh;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pageSlide 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes pageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Floating hearts background */
+.heart-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 15s infinite;
+    opacity: 0.3;
+}
+
+/* Medical symbols floating */
+.medical-symbol {
+    position: absolute;
+    font-size: 18px;
+    animation: float 20s infinite;
+    opacity: 0.2;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 60px 40px;
+    border-radius: 40px;
+    box-shadow: 0 30px 60px rgba(255, 107, 157, 0.3);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: var(--pink);
+    margin-bottom: 30px;
+    animation: fadeInDown 1s ease;
+}
+
+.subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: var(--purple);
+    margin-bottom: 40px;
+    animation: fadeIn 1.5s ease;
+}
+
+p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--dark);
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease;
+}
+
+.highlight {
+    color: var(--pink);
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.btn {
+    font-family: 'Quicksand', sans-serif;
+    padding: 18px 50px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.question-container {
+    margin: 50px 0;
+}
+
+.question {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--pink);
+    margin-bottom: 40px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.button-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    position: relative;
+    min-height: 300px; /* Large space for No button to move */
+    padding: 20px;
+    width: 100%;
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #50c878, #90ee90);
+    color: white;
+    position: relative;
+    z-index: 10; /* Always on top */
+}
+
+.btn-yes:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 40px rgba(80, 200, 120, 0.5);
+}
+
+.btn-no {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+    color: white;
+    position: absolute !important; /* Use absolute positioning */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Start centered */
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 5;
+}
+
+.btn-no:hover {
+    transform: scale(0.95);
+}
+
+/* Prevent button from being clickable when moving */
+.btn-no.moving {
+    pointer-events: none;
+}
+
+.emoji {
+    font-size: 4rem;
+    margin: 20px 0;
+    animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+    }
+    25% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    50% { 
+        transform: scale(1.15) rotate(0deg);
+    }
+    75% {
+        transform: scale(1.1) rotate(-5deg);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.gif-container {
+    margin: 30px 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.gif-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Sparkles */
+.sparkle {
+    position: absolute;
+    font-size: 2rem;
+    animation: sparkleAnim 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes sparkleAnim {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+/* Final page special styles */
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--pink);
+    animation: confettiFall 3s linear infinite;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+.heart-burst {
+    animation: heartBurst 1s ease-out forwards;
+}
+
+@keyframes heartBurst {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .subtitle { font-size: 1.5rem; }
+    p { font-size: 1.1rem; }
+    .question { font-size: 2rem; }
+    .btn { padding: 15px 35px; font-size: 1.2rem; }
+    .container { padding: 40px 25px; }
+}
+
+.nav-progress {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 107, 157, 0.3);
+    transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+    background: var(--pink);
+    transform: scale(1.3);
+}
