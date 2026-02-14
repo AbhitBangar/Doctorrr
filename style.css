@@ -212,6 +212,7 @@ p {
     color: white;
     position: relative;
     z-index: 10; /* Always on top */
+    margin-right: 15px; /* Space from No button initially */
 }
 
 .btn-yes:hover {
@@ -222,12 +223,16 @@ p {
 .btn-no {
     background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
     color: white;
-    position: absolute !important; /* Use absolute positioning */
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); /* Start centered */
+    position: relative; /* Start as relative for initial side-by-side layout */
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: 5;
+    margin-left: 15px; /* Space from Yes button initially */
+}
+
+/* After first move, switch to absolute positioning */
+.btn-no.has-moved {
+    position: absolute !important;
+    margin-left: 0;
 }
 
 .btn-no:hover {

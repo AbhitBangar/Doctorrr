@@ -127,6 +127,11 @@ function moveButtonAway(btn, buttonId) {
     // Add moving class to prevent clicks while moving
     btn.classList.add('moving');
     
+    // On first move, switch to absolute positioning
+    if (!btn.classList.contains('has-moved')) {
+        btn.classList.add('has-moved');
+    }
+    
     // Get container boundaries
     const container = btn.closest('.button-container');
     const containerRect = container.getBoundingClientRect();
