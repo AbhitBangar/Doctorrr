@@ -235,12 +235,19 @@ function handleNoClick(btn, nextPage) {
     if (buttonId === '7') requiredShifts = 3; // Second page needs 3 shifts
     if (buttonId === '8') requiredShifts = 3; // Third page needs 3 shifts
     if (buttonId === '9') requiredShifts = 3; // Fourth page needs 3 shifts
+    if (buttonId === '10') requiredShifts = 3; // Fifth/LAST page needs 3 shifts
     
     // Check if enough shifts have been made
     if (shiftCount >= requiredShifts) {
-        // Enough shifts! Allow click
-        console.log(`✅ Button clicked! Moving to next page...`);
-        goToPage(nextPage);
+        // Check if this is the LAST No button (buttonId = '10')
+        if (buttonId === '10') {
+            // Show funny popup ONLY on the last page (page 10) before going to final
+            showFunnyPopup('final');
+        } else {
+            // For pages 6-9, just go to next page normally
+            console.log(`✅ Button clicked! Moving to next page...`);
+            goToPage(nextPage);
+        }
     } else {
         // Not enough shifts - show console message
         const remaining = requiredShifts - shiftCount;
@@ -252,6 +259,30 @@ function handleNoClick(btn, nextPage) {
             btn.style.animation = '';
         }, 300);
     }
+}
+
+// Show funny romantic popup
+function showFunnyPopup(nextPage) {
+    const funnyMessages = [
+        "😅 The 'No' button is exhausted from running away!\n\n💕 It's given up and wants you to click 'Yes' instead!\n\nYour future doctor deserves happiness! 💖",
+        
+        "🏃‍♂️ BREAKING NEWS: The 'No' button has officially retired!\n\n💓 After extensive cardio (running from you), it recommends clicking 'Yes' for your heart health!\n\nDoctor's orders! 🩺",
+        
+        "😂 The 'No' button called in sick!\n\n📋 Diagnosis: Severe fatigue from dodging your clicks\n💊 Prescription: Click 'Yes' immediately\n⚕️ Prognosis: Excellent if you comply!",
+        
+        "🎯 Mission Failed Successfully!\n\n❌ The 'No' button tried to escape...\n✅ But your persistence won!\n💕 Time to click 'Yes' and make us both happy!",
+        
+        "🩺 MEDICAL ALERT!\n\n📊 The 'No' button's vital signs are failing!\n💓 Heart rate: Giving up\n🫁 Breathing: Surrendering\n💚 Treatment: Click 'Yes' STAT!"
+    ];
+    
+    // Pick a random funny message
+    const message = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
+    
+    // Show alert with the message
+    alert(message);
+    
+    // After they click OK on the popup, go to the final page
+    goToPage('final');
 }
 
 // Create confetti effect
