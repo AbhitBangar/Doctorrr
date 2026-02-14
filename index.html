@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urgent: Heart Palpitations Detected! 💓</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Playfair+Display:wght@400;600;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #ff6b9d;
+            --light-pink: #ffc2d1;
+            --peach: #ffb5a7;
+            --cream: #fff5e4;
+            --purple: #c779d0;
+            --dark: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-pink) 100%);
+            min-height: 100vh;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pageSlide 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes pageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Floating hearts background */
+        .heart-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 15s infinite;
+            opacity: 0.3;
+        }
+
+        /* Medical symbols floating */
+        .medical-symbol {
+            position: absolute;
+            font-size: 18px;
+            animation: float 20s infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(255, 107, 157, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--pink);
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--purple);
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--dark);
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease;
+        }
+
+        .highlight {
+            color: var(--pink);
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .btn {
+            font-family: 'Quicksand', sans-serif;
+            padding: 18px 50px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .question-container {
+            margin: 50px 0;
+        }
+
+        .question {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--pink);
+            margin-bottom: 40px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #50c878, #90ee90);
+            color: white;
+            position: relative;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(80, 200, 120, 0.5);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .btn-no:hover {
+            transform: scale(0.9);
+        }
+
+        .emoji {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .gif-container {
+            margin: 30px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            font-size: 2rem;
+            animation: sparkleAnim 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Final page special styles */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--pink);
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .heart-burst {
+            animation: heartBurst 1s ease-out forwards;
+        }
+
+        @keyframes heartBurst {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.5rem; }
+            p { font-size: 1.1rem; }
+            .question { font-size: 2rem; }
+            .btn { padding: 15px 35px; font-size: 1.2rem; }
+            .container { padding: 40px 25px; }
+        }
+
+        .nav-progress {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 107, 157, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--pink);
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-bg" id="heartBg"></div>
+    <div class="nav-progress" id="navProgress"></div>
+
+    <!-- Page 1: Introduction -->
+    <div class="page active" id="page1">
+        <div class="container">
+            <h1>⚕️ Medical Alert! ⚕️</h1>
+            <div class="subtitle">Diagnosis: Severe case of falling for you!</div>
+            <div class="emoji">🩺</div>
+            <p><strong>Patient:</strong> Me<br>
+            <strong>Symptoms:</strong> Increased heart rate, butterflies in stomach, inability to stop thinking about you<br>
+            <strong>Diagnosis:</strong> Acute Love Syndrome</p>
+            <p class="highlight">Prognosis: Incurable without your reciprocation! 💉</p>
+            <p>Warning: Side effects may include excessive smiling and daydreaming!</p>
+            <button class="btn btn-primary" onclick="goToPage(2)">Review Chart 📋</button>
+        </div>
+    </div>
+
+    <!-- Page 2: Your Smile -->
+    <div class="page" id="page2">
+        <div class="container">
+            <h1>Your Smile: Better Than Medicine 😊</h1>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGF3eHk4N3JsMnZxbGZxZnBtZWM4ZGF2cTNsNWJyb2xqanBkYXJhcSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7aCWJavAgtBzLWrS/giphy.gif" alt="Beautiful smile">
+            </div>
+            <p><strong>Clinical Observation:</strong> Your smile has healing properties! ⚕️</p>
+            <p>It's more effective than any antibiotic, antidepressant, or analgesic combined!</p>
+            <p class="highlight">Side effects: Instant mood elevation, reduced stress hormones, increased dopamine levels! 😄</p>
+            <p><em>"Laughter is the best medicine, but your smile is the cure!"</em></p>
+            <button class="btn btn-primary" onclick="goToPage(3)">Next Vital Sign 💓</button>
+        </div>
+    </div>
+
+    <!-- Page 3: Your Beauty -->
+    <div class="page" id="page3">
+        <div class="container">
+            <h1>Physical Examination Results ✨</h1>
+            <div class="emoji">🔬</div>
+            <p><strong>External Assessment:</strong> Absolutely stunning! 💯</p>
+            <p><strong>Internal Assessment:</strong> Beautiful heart, brilliant mind, incredible soul!</p>
+            <p class="highlight">Final Report: You're anatomically perfect inside and out! 🩺</p>
+            <p><em>Fun fact: Studies show that your beauty causes acute tachycardia in nearby observers (especially me)!</em></p>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnVrcWN5OGd6ZGZ6aWJkaXgwOWJqbGZ4ZHp5b3BzaWx5bzFkejRyZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26BRv0ThflsHCqDrG/giphy.gif" alt="Beautiful">
+            </div>
+            <button class="btn btn-primary" onclick="goToPage(4)">Continue Assessment 📊</button>
+        </div>
+    </div>
+
+    <!-- Page 4: The Way You Are -->
+    <div class="page" id="page4">
+        <div class="container">
+            <h1>Dr. [Future Doctor] - Character Analysis 🌟</h1>
+            <div class="emoji">👩‍⚕️</div>
+            <p><strong>Intelligence Level:</strong> Off the charts! 📈</p>
+            <p><strong>Compassion:</strong> Unlimited supply! ❤️</p>
+            <p><strong>Work Ethic:</strong> Inspirational! 💪</p>
+            <p><strong>Humor:</strong> Perfect dose! 😄</p>
+            <p class="highlight">Conclusion: You're going to be the most amazing doctor! 🩺</p>
+            <p><em>Warning: Your dedication to saving lives is extremely attractive!</em></p>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHpvdXBhdjRjaDM0bDdpa2RkY3NhbzJycHFhcTJ6cXp3aXZ2MmE3cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oz8xIsloV7zOoTlee/giphy.gif" alt="Amazing">
+            </div>
+            <button class="btn btn-primary" onclick="goToPage(5)">Check Lab Results 🧪</button>
+        </div>
+    </div>
+
+    <!-- Page 5: How You Make Me Feel -->
+    <div class="page" id="page5">
+        <div class="container">
+            <h1>Lab Results: Love Hormone Analysis 💗</h1>
+            <div class="emoji">💉</div>
+            <p><strong>Dopamine:</strong> ↑↑↑ Extremely Elevated</p>
+            <p><strong>Serotonin:</strong> ↑↑↑ Peak Levels</p>
+            <p><strong>Oxytocin:</strong> ↑↑↑ Through the Roof</p>
+            <p><strong>Heart Rate when I see you:</strong> 120 BPM (Tachycardia confirmed! 💓)</p>
+            <p class="highlight">Diagnosis: You trigger all the happiness chemicals in my brain! 🧠</p>
+            <p><em>Note: No pharmacological intervention can replicate this feeling!</em></p>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJ4YnVoNHZiemJ0aWVjaWhqemUxMzlhaXNjOG85eXRoMmZ0ZGxvZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o6Zt6ML6BklcajjsA/giphy.gif" alt="Hearts">
+            </div>
+            <button class="btn btn-primary" onclick="goToPage(6)">Critical Results! 🚨</button>
+        </div>
+    </div>
+
+    <!-- Page 6: The Big Question (Attempt 1) -->
+    <div class="page" id="page6">
+        <div class="container">
+            <h1>🚨 URGENT: Treatment Required! 🚨</h1>
+            <div class="question-container">
+                <div class="emoji">💊</div>
+                <p><strong>Prescription for Patient (Me):</strong></p>
+                <p>💝 Take one [Your Name] daily (or more frequently)</p>
+                <p>⚠️ Warning: May cause extreme happiness</p>
+                <div class="question">Will you be my girlfriend? 💖</div>
+                <p><em>(Only you can cure this condition!)</em></p>
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnplcmJuZGE5aDdteGNsMWl1aGR6czV3eXlyY3pxbHVzY2tvODBhZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0HU7yHIK6Nc3WcE0/giphy.gif" alt="Propose">
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-yes" onclick="goToPage('final')">Yes! Start treatment! 💚</button>
+                <button class="btn btn-no" onclick="tryEscape(this, 7)" onmouseover="moveButton(this)">Contraindicated 😢</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 7: Second Attempt -->
+    <div class="page" id="page7">
+        <div class="container">
+            <h1>Wait! Second Opinion Needed! 🥺</h1>
+            <div class="emoji">🩺</div>
+            <p><strong>Re-assessment Required!</strong></p>
+            <p>I think there was an error in the first diagnosis...</p>
+            <p>Let me check your heart again! 💓</p>
+            <div class="question-container">
+                <div class="question">Do you love me too? 💕</div>
+                <p><em>(Medical fact: Love is contagious, and I'm definitely infected!)</em></p>
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWRxaW53cDJ6MXhkZWZ3enV5NzdrMHlxcHN2OXU0aXhtY25jMDFxZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MDXomrcGshGso/giphy.gif" alt="Puppy eyes">
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-yes" onclick="goToPage('final')">Positive result! 💚</button>
+                <button class="btn btn-no" onclick="tryEscape(this, 8)" onmouseover="moveButton(this)">Negative 😔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 8: Third Attempt -->
+    <div class="page" id="page8">
+        <div class="container">
+            <h1>Emergency Consultation! 🥹</h1>
+            <div class="emoji">🚑</div>
+            <p><strong>Doctor's Orders:</strong></p>
+            <p>Patient needs immediate love and affection! STAT!</p>
+            <p>This is a Code Blue situation! 💙</p>
+            <div class="question-container">
+                <div class="question">Can we be together? 💑</div>
+                <p><em>(Fun fact: Relationships have been proven to improve overall health and longevity!)</em></p>
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3U3cGNvbnFkc2Q0Z3RobGN4dG16aTR3Nng0cTRqcHdodTQ2bmN4MCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l4FGGafcOHmrlQxG0/giphy.gif" alt="Please">
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-yes" onclick="goToPage('final')">Administer treatment! 💚</button>
+                <button class="btn btn-no" onclick="tryEscape(this, 9)" onmouseover="shrinkButton(this)">Decline procedure 😅</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 9: Fourth Attempt -->
+    <div class="page" id="page9">
+        <div class="container">
+            <h1>Critical Condition! 💔</h1>
+            <div class="emoji">⚕️</div>
+            <p><strong>EKG Results:</strong> Showing signs of heartbreak! 📉</p>
+            <p><strong>But wait!</strong> I studied the medical literature...</p>
+            <p>Persistence is key in treatment protocols! 💪</p>
+            <div class="question-container">
+                <div class="question">Will you go out with me? 🌹</div>
+                <p><em>(Medical joke: You must be my appendix... because I have a funny feeling I should take you out!)</em></p>
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW5iZTllcHgyY2NvNXhqcjQweWloYWdkNm85dzlqMWJtbnNwa2o2eCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" alt="Sad">
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-yes" onclick="goToPage('final')">Treatment approved! 💚</button>
+                <button class="btn btn-no" onclick="disappearButton(this, 10)" onmouseover="makeButtonTiny(this)">Patient refusing 🙈</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 10: Almost There -->
+    <div class="page" id="page10">
+        <div class="container">
+            <h1>Final Diagnosis Time! 😊</h1>
+            <div class="emoji">🔬</div>
+            <p><strong>After extensive research and clinical trials...</strong></p>
+            <p>I've concluded that we have incredible chemistry! ⚗️</p>
+            <p>Our compatibility score is off the charts! 📊</p>
+            <div class="question-container">
+                <div class="question">Be mine? Doctor's orders! 💊</div>
+                <p><em>(Medical joke: Are you a pulmonary embolism? Because you take my breath away!)</em></p>
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWg3OXowajdtcWI5cnFoY2hjNGFpYWYxc2Z5aW15NXRoamRyZ3kzNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/EvYHHSntaIl5m/giphy.gif" alt="Cute">
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-yes" onclick="goToPage('final')">Prescription accepted! 💚</button>
+                <button class="btn btn-no" onclick="alert('Even the \"No\" button has given up! Time to say YES, future Doctor! 😄'); goToPage('final')">No can do... wait! 😂</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Page: Success! -->
+    <div class="page" id="pageFinal">
+        <div class="confetti-container" id="confetti"></div>
+        <div class="container heart-burst">
+            <h1>🎉 TREATMENT SUCCESSFUL! 🎉</h1>
+            <div class="emoji">⚕️❤️</div>
+            <h1 style="font-size: 2.5rem; margin: 20px 0;">Congratulations Dr. [Future Doctor]!</h1>
+            <p style="font-size: 1.8rem;">You just cured my heart! 💖</p>
+            <p><strong>Diagnosis:</strong> We're officially together! ✅</p>
+            <p><strong>Prognosis:</strong> Excellent! Long-term happiness expected! 📈</p>
+            <p><strong>Treatment Plan:</strong> Unlimited love and support! 💕</p>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnVmb2pwcjIwZzR5a2NjYWloaXRqcnZ4aXBmcWczMzZ1ZjBtZWF4eCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/G96zgIcQn1L2xpmdxi/giphy.gif" alt="Celebration">
+            </div>
+            <p style="font-size: 1.5rem; margin-top: 30px;">Thank you for agreeing to be mine! 🥰</p>
+            <div class="emoji" style="font-size: 5rem;">👨‍⚕️❤️👩‍⚕️</div>
+            <p class="highlight" style="font-size: 2rem;">I love you so much, future Doctor! 💕</p>
+            <p style="font-size: 1.2rem; margin-top: 20px;"><em>Side effects may include: constant smiling, excessive happiness, and butterflies in stomach! 🦋</em></p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize floating hearts and medical symbols
+        function createFloatingHearts() {
+            const heartBg = document.getElementById('heartBg');
+            const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝', '💞'];
+            const medical = ['⚕️', '🩺', '💊', '💉', '🏥', '🔬', '⚗️'];
+            
+            // Add hearts
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heartBg.appendChild(heart);
+            }
+            
+            // Add medical symbols
+            for (let i = 0; i < 10; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'medical-symbol';
+                symbol.textContent = medical[Math.floor(Math.random() * medical.length)];
+                symbol.style.left = Math.random() * 100 + '%';
+                symbol.style.animationDelay = Math.random() * 20 + 's';
+                symbol.style.fontSize = (Math.random() * 15 + 12) + 'px';
+                heartBg.appendChild(symbol);
+            }
+        }
+
+        // Navigation progress dots
+        function updateProgress() {
+            const totalPages = 10;
+            const navProgress = document.getElementById('navProgress');
+            navProgress.innerHTML = '';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                navProgress.appendChild(dot);
+            }
+        }
+
+        // Go to page function
+        function goToPage(pageNum) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            const targetPage = pageNum === 'final' ? 
+                document.getElementById('pageFinal') : 
+                document.getElementById('page' + pageNum);
+            
+            targetPage.classList.add('active');
+            
+            // Update progress dots
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach((dot, index) => {
+                if (index < (pageNum === 'final' ? 10 : pageNum - 1)) {
+                    dot.classList.add('active');
+                }
+            });
+
+            // Add confetti for final page
+            if (pageNum === 'final') {
+                createConfetti();
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Make "No" button move away on hover
+        function moveButton(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 100);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 100);
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // Shrink the button
+        function shrinkButton(btn) {
+            btn.style.transform = 'scale(0.7)';
+        }
+
+        // Make button tiny
+        function makeButtonTiny(btn) {
+            btn.style.transform = 'scale(0.3)';
+        }
+
+        // Try to escape (redirect to next page)
+        function tryEscape(btn, nextPage) {
+            goToPage(nextPage);
+        }
+
+        // Make button disappear
+        function disappearButton(btn, nextPage) {
+            btn.style.opacity = '0';
+            setTimeout(() => goToPage(nextPage), 300);
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#ff6b9d', '#ffc2d1', '#ffb5a7', '#c779d0', '#50c878', '#90ee90'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confettiContainer.appendChild(confetti);
+            }
+        }
+
+        // Initialize
+        createFloatingHearts();
+        updateProgress();
+
+        // Add sparkles randomly
+        setInterval(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.textContent = '✨';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 3000);
+        }, 2000);
+    </script>
+</body>
+</html>
